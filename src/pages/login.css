@@ -1,0 +1,29 @@
+.Container {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+input[type=text] {
+  padding:8px;
+  margin-bottom:20px;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #4CAF50;
+  width: 180px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: calc(2vmin);
+  padding: 10px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}

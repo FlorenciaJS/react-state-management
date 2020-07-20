@@ -17,7 +17,7 @@ export class ApiService {
             throw body.error
           }
       })
-    }).catch(err=>err)
+    })
   }
 }
 

@@ -8,6 +8,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  flex:1;
+}
+
+.form {
+  max-width: 300px;
 }
 
 input[type=text] {

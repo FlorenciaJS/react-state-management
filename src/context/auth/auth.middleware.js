@@ -10,17 +10,20 @@ export const applyMiddleware = (dispatch, action) => {
       ApiService.post(action.payload)
       .then((token) => {
         dispatch({ type: 'SUCCESS'})
-        applyMiddleware(dispatch, {type: 'SET_TOKEN', token})
+        StorageService.setAuthToken(token);
+        dispatch({type: 'SET_TOKEN', token})
+        //Set currentUser
+        //Redirect to Home
       }).catch((error) => {
         dispatch({ type: 'ERROR', msg: error})
       })
       break;
-      
-    case ('SET_TOKEN'):
-      StorageService.setAuthToken(action.token);
-      dispatch({type: 'SET_TOKEN', token: action.token})
-      break;
-      
+
+    case ('LOGOUT'):
+      StorageService.clearAuthToken();
+      dispatch({type: 'SET_TOKEN', token: null})
+      //Redirect to login
+
     default:
       return null;
   }

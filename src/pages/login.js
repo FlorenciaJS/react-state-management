@@ -20,12 +20,20 @@ export const Login = () => {
   
   return(
     <div className="Container">
-      <h1>Login</h1>
-      {status === 'error'&&<p>{errormsg}</p>}
-      {token && <p>{token}</p>}
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
-      <input type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
-      <input type="submit" onClick={onSubmit} value={status !== 'fetching' ? "Ingresar" : "Loading..."}/>
+      <h1>{token ? "Welcome" : "Login"}</h1>
+      { status === 'error'&&<p>{errormsg}</p> }
+      { status === 'fetching'&&<p>...Loading</p> }
+      { token 
+      ? <div> 
+          <p>{token}</p>
+          <input type="submit" onClick={() => actions.logout()} value="Logout"/>
+        </div>
+      : <section className="form">
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+          <input type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <input type="submit" onClick={onSubmit} value={"Login"}/>
+        </section>
+      }
     </div>
   );
 }

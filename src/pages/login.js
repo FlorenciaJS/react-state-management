@@ -5,13 +5,13 @@ import { AuthContext } from '../context/auth/auth.context';
 
 export const Login = () => {
 
-  const { pending, error, actions } = useContext(AuthContext); 
-  const [username, setUsername ] = useState("");
-  const [password, setPassword ] = useState("");
+  const { status, errormsg, token, actions, dispatch } = useContext(AuthContext); 
+  const [ username, setUsername ] = useState('eve.holt@reqres.in');
+  const [ password, setPassword ] = useState('cityslicka');
    
   const onSubmit = (e) => {
     if (username === "" || password === "") {
-       console.log("Undefined credentials");
+      dispatch({type: 'ERROR', msg: 'Undefined credentials'})
     } else {
       actions.login({username, password})
     }
@@ -21,10 +21,11 @@ export const Login = () => {
   return(
     <div className="Container">
       <h1>Login</h1>
-      {error&&<p>{error}</p>}
-      <input type="text" onChange={(e) => setUsername(e.target.value)}/>
-      <input type="text" onChange={(e) => setPassword(e.target.value)}/>
-      <input type="submit" onClick={onSubmit} value={!pending ? "Ingresar" : "loading..."}/>
+      {status === 'error'&&<p>{errormsg}</p>}
+      {token && <p>{token}</p>}
+      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+      <input type="text" value={password} onChange={(e) => setPassword(e.target.value)}/>
+      <input type="submit" onClick={onSubmit} value={status !== 'fetching' ? "Ingresar" : "Loading..."}/>
     </div>
   );
 }

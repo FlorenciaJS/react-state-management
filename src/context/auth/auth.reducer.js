@@ -1,27 +1,32 @@
 const initialState = {
-  pending: false,
-  error: null,
-  token: null,
+  status: null,
+  errormsg: null,
+  token: null
 };
 
 const AuthReducer = (state=initialState, action) => {
   switch (action.type) {
-    case 'STARTED':
+    case 'FETCHING':
       return {
         ...state,
-        pending: true,
+        status: 'fetching',
       }
     case 'SUCCESS':
       return {
         ...state,
-        pending: false,
+        status: 'success',
       }
-    case 'FAIL':
+    case 'ERROR':
       return {
         ...state,
-        pending: false,
-        error: action.error,
-      };
+        status: 'error',
+        errormsg: action.msg,
+      }
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        token: action.token
+      }
     default:
       return state
   }

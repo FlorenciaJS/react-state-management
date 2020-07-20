@@ -1,17 +1,17 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
+import { useAuthContext } from '../context/auth/auth.context';
 
 import './login.css';
-import { AuthContext } from '../context/auth/auth.context';
 
 export const Login = () => {
 
-  const { status, errormsg, token, actions, dispatch } = useContext(AuthContext); 
+  const { status, errormsg, token, actions } = useAuthContext(); 
   const [ username, setUsername ] = useState('eve.holt@reqres.in');
   const [ password, setPassword ] = useState('cityslicka');
    
   const onSubmit = (e) => {
     if (username === "" || password === "") {
-      dispatch({type: 'ERROR', msg: 'Undefined credentials'})
+      actions.error('Undefined credentials')
     } else {
       actions.login({username, password})
     }

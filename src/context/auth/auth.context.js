@@ -1,22 +1,20 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useContext } from 'react';
 import { AuthReducer, initialState } from './auth.reducer';
 import { Actions } from './auth.actions';
-import { applyMiddleware } from './auth.middleware';
 
 const AuthContext = createContext(initialState);
+const useAuthContext = () => useContext(AuthContext);
 
 const AuthContextProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(AuthReducer, initialState)
-  const actions = Actions(state, applyMiddleware(dispatch));
+  const actions = Actions(dispatch);
 
   return (
-    <AuthContext.Provider
-      value={{ ...state, dispatch, actions }}
-    >
+    <AuthContext.Provider value={{ ...state, actions }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-export { AuthContext, AuthContextProvider };
+export { AuthContextProvider, useAuthContext };

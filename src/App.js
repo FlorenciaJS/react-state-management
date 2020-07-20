@@ -1,9 +1,12 @@
 import React from 'react'
 import { Login } from './pages/login';
+import { AuthContextProvider } from './context/auth/auth.context';
 
 function App() {
   return (
-    <Login/>
+    <AuthContextProvider>
+      <Login/>
+    </AuthContextProvider>
   );
 }
 
